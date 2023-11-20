@@ -74,7 +74,6 @@ trait CanBeValidated
 
     /**
      * @param  array<scalar> | Arrayable | string | Closure  $values
-     * @param  bool | Closure  $condition
      */
     public function doesntStartWith(array | Arrayable | string | Closure $values, bool | Closure $condition = true): static
     {
@@ -97,7 +96,6 @@ trait CanBeValidated
 
     /**
      * @param  array<scalar> | Arrayable | string | Closure  $values
-     * @param  bool | Closure  $condition
      */
     public function doesntEndWith(array | Arrayable | string | Closure $values, bool | Closure $condition = true): static
     {
@@ -120,7 +118,6 @@ trait CanBeValidated
 
     /**
      * @param  array<scalar> | Arrayable | string | Closure  $values
-     * @param  bool | Closure  $condition
      */
     public function endsWith(array | Arrayable | string | Closure $values, bool | Closure $condition = true): static
     {
@@ -181,7 +178,6 @@ trait CanBeValidated
 
     /**
      * @param  array<scalar> | Arrayable | string | Closure  $values
-     * @param  bool | Closure  $condition
      */
     public function in(array | Arrayable | string | Closure $values, bool | Closure $condition = true): static
     {
@@ -248,7 +244,6 @@ trait CanBeValidated
 
     /**
      * @param  array<scalar> | Arrayable | string | Closure  $values
-     * @param  bool | Closure  $condition
      */
     public function notIn(array | Arrayable | string | Closure $values, bool | Closure $condition = true): static
     {
@@ -281,7 +276,7 @@ trait CanBeValidated
     public function nullable(bool | Closure $condition = true): static
     {
         $this->required(static function (Field $component) use ($condition): bool {
-            return !$component->evaluate($condition);
+            return ! $component->evaluate($condition);
         });
 
         return $this;
@@ -370,7 +365,6 @@ trait CanBeValidated
 
     /**
      * @param  array<scalar> | Arrayable | string | Closure  $values
-     * @param  bool | Closure  $condition
      */
     public function startsWith(array | Arrayable | string | Closure $values, bool | Closure $condition = true): static
     {
@@ -487,7 +481,7 @@ trait CanBeValidated
         $this->rule(static function (Field $component, ?string $model) use ($column, $ignorable, $ignoreRecord, $modifyRuleUsing, $table) {
             $table = $component->evaluate($table) ?? $model;
             $column = $component->evaluate($column) ?? $component->getName();
-            $ignorable = ($ignoreRecord && !$ignorable) ?
+            $ignorable = ($ignoreRecord && ! $ignorable) ?
                 $component->getRecord() :
                 $component->evaluate($ignorable);
 
@@ -607,13 +601,13 @@ trait CanBeValidated
             $rules[$statePath] = $componentRules;
         }
 
-        if (!$this instanceof HasNestedRecursiveValidationRules) {
+        if (! $this instanceof HasNestedRecursiveValidationRules) {
             return;
         }
 
         $nestedRecursiveValidationRules = $this->getNestedRecursiveValidationRules();
 
-        if (!count($nestedRecursiveValidationRules)) {
+        if (! count($nestedRecursiveValidationRules)) {
             return;
         }
 
@@ -635,7 +629,7 @@ trait CanBeValidated
         $this->rule(static function (Field $component) use ($date, $isStatePathAbsolute, $rule): string {
             $date = $component->evaluate($date);
 
-            if (!(strtotime($date) || $isStatePathAbsolute)) {
+            if (! (strtotime($date) || $isStatePathAbsolute)) {
                 $containerStatePath = $component->getContainer()->getStatePath();
 
                 if ($containerStatePath) {
@@ -654,7 +648,7 @@ trait CanBeValidated
         $this->rule(static function (Field $component) use ($isStatePathAbsolute, $rule, $statePath): string {
             $statePath = $component->evaluate($statePath);
 
-            if (!$isStatePathAbsolute) {
+            if (! $isStatePathAbsolute) {
                 $containerStatePath = $component->getContainer()->getStatePath();
 
                 if ($containerStatePath) {
@@ -676,7 +670,7 @@ trait CanBeValidated
         $this->rule(static function (Field $component) use ($isStatePathAbsolute, $rule, $statePaths): string {
             $statePaths = $component->evaluate($statePaths);
 
-            if (!$isStatePathAbsolute) {
+            if (! $isStatePathAbsolute) {
                 if (is_string($statePaths)) {
                     $statePaths = explode(',', $statePaths);
                 }
@@ -708,7 +702,7 @@ trait CanBeValidated
             $statePath = $component->evaluate($statePath);
             $stateValues = $component->evaluate($stateValues);
 
-            if (!$isStatePathAbsolute) {
+            if (! $isStatePathAbsolute) {
                 $containerStatePath = $component->getContainer()->getStatePath();
 
                 if ($containerStatePath) {

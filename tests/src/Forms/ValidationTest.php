@@ -169,7 +169,6 @@ test('the in() rule api works like passing laravel\'s `Rule::in()` as a custom r
         $laravelFails = array_keys($exception->validator->failed()[$field->getStatePath()]);
     }
 
-
     expect($filamentFails)
         ->toBe($laravelFails);
 })->with([
@@ -295,7 +294,6 @@ test('the notIn() rule api works like passing laravel\'s `Rule::notIn()` as a cu
     } catch (ValidationException $exception) {
         $laravelFails = array_keys($exception->validator->failed()[$field->getStatePath()]);
     }
-
 
     expect($filamentFails)
         ->toBe($laravelFails);
@@ -425,7 +423,7 @@ test('the startsWith() rule api works like passing laravel\'s `starts_with:` as 
         ComponentContainer::make($component)
             ->statePath('data')
             ->components([
-                $field->rule('starts_with:' . $allowed)
+                $field->rule('starts_with:' . $allowed),
             ])
             ->validate();
     } catch (ValidationException $exception) {
@@ -560,7 +558,7 @@ test('the doesntStartWith() rule api works like passing laravel\'s `doesnt_start
         ComponentContainer::make($component)
             ->statePath('data')
             ->components([
-                $field->rule('doesnt_start_with:' . $allowed)
+                $field->rule('doesnt_start_with:' . $allowed),
             ])
             ->validate();
     } catch (ValidationException $exception) {
@@ -695,7 +693,7 @@ test('the endsWith() rule api works like passing laravel\'s `ends_with:` as a cu
         ComponentContainer::make($component)
             ->statePath('data')
             ->components([
-                $field->rule('ends_with:' . $allowed)
+                $field->rule('ends_with:' . $allowed),
             ])
             ->validate();
     } catch (ValidationException $exception) {
@@ -830,7 +828,7 @@ test('the doesntEndWith() rule api works like passing laravel\'s `doesnt_end_wit
         ComponentContainer::make($component)
             ->statePath('data')
             ->components([
-                $field->rule('doesnt_end_with:' . $allowed)
+                $field->rule('doesnt_end_with:' . $allowed),
             ])
             ->validate();
     } catch (ValidationException $exception) {
